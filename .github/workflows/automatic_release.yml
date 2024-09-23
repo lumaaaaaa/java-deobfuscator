@@ -29,13 +29,8 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Rename final file
       run: mv target/deobfuscator-*.jar target/deobfuscator.jar
-    - name: Prerelease
-      uses: "marvinpinto/action-automatic-releases@latest"
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v4
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: false
-        title: "Latest Build"
-        files: |
-          LICENSE
-          target/deobfuscator.jar
+        name: deobfuscator.jar
+        path: target/deobfuscator.jar
